@@ -22,7 +22,6 @@ The goal of this exercise is to completely terraform a static site hosted in s3 
 - Routing should work for subdirectories as well
 ## Lambda@Edge
 - Routes viewer requests to index.html
-- Add `cache-control` header to all responses instructing the browser and all public caches that they must refresh at least every 5 minutes
 
 # Requirements
 1. Terraform module for deploying all [Resources](#resources).
