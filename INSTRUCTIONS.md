@@ -15,6 +15,7 @@ The goal of this exercise is to completely terraform a static site hosted in s3 
 - Bucket should contain static objects from [StaticSite][staticsite]
 - Bucket must be private (and not a website bucket)
 - Only Cloudfront is allowed access to bucket
+- Add header to all objects instructing the browser and all public caches that they must refresh at least every 5 minutes
 ## CloudFront
 - Uses S3 bucket as origin
 - Uses Lambda@Edge to route viewer requests for directories to the index.html file
