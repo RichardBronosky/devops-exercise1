@@ -13,32 +13,35 @@ The goal of this exercise is to completely terraform a static site hosted in s3 
 # Resources
 ## S3 Bucket
 - Bucket should contain static objects from [StaticSite][staticsite]
-- Bucket must be private
+- Bucket must be private (and not a website bucket)
 - Only Cloudfront is allowed access to bucket
 ## CloudFront
 - Uses S3 bucket as origin
-- Uses Lambda@Edge to route viewer requests to index.html in s3 bucket
+- Uses Lambda@Edge to route viewer requests for directories to the index.html file
+    - Verify this is done correctly by refreshing page-2 or opening it in a new window.
 - Routing should work for subdirectories as well
 ## Lambda@Edge
 - Routes viewer requests to index.html
+- Add `cache-control` header to all responses instructing the browser and all public caches that they must refresh at least every 5 minutes
 
 # Requirements
 1. Terraform module for deploying all [Resources](#resources).
 2. Ideally the entire static site can be deployed with a single command.
 3. Put complete (but not "wordy") usage instructions in the [README.md][readme] file.
     - The README should be measured by "if I needed to deploy this in an emergency, would I be satisfied by this documentation".
+4. Note the references you use.
 
 # Notes
 - Lambda@Edge has no Free Tier offering.
 - S3 and CloudFront are in the "AWS Free Tier (12 Month Introductory Period)" category.
 - All AWS accounts are "production ready" and require a credit card (that has not been used on any other account) to open.
-  - There is no such thing as a "Free Tier account".
-  - You do not get charged if you do not use services outside the Free Tier.
+    - There is no such thing as a "Free Tier account".
+    - You do not get charged if you do not use services outside the Free Tier.
 - If you have an account that is no longer in the "12 Month Introductory Period" of the Free Tier, you may choose to use it anyway and should not incur significant charges.
-  - The StaticSite files are 1.2MB
-  - Lambda@Edge is [$0.0000006 per request and $0.00005001 per GB-second of memory used][lambda]
-  - S3 is [$0.026 (or less) per GB][s3]
-  - CloudFront is [$0.085 (or less) per GB served][cloudfront].
+    - The StaticSite files are 1.2MB
+    - Lambda@Edge is [$0.0000006 per request and $0.00005001 per GB-second of memory used][lambda]
+    - S3 is [$0.026 (or less) per GB][s3]
+    - CloudFront is [$0.085 (or less) per GB served][cloudfront].
 
 [free]: https://aws.amazon.com/free/
 [lambda]: https://aws.amazon.com/lambda/pricing/#Lambda.40Edge_pricing_details
